@@ -247,4 +247,37 @@ public class InsuranceQuoteTestSuiteTest
         //Assert
         Assert.That(driver.FindElement(By.Id("email-error")).Text, Is.EqualTo("Must be a valid email address"));
     }
+    [Test]
+    public void GetInsuranceQuote06_withInput35and17and1andInvalidPostalCode_OutputPostalCodeValidationError()
+    {
+        //Arrange
+        driver.Navigate().GoToUrl(baseURL);
+        driver.Manage().Window.Size = new System.Drawing.Size(1536, 864);
+
+        //Act
+        driver.FindElement(By.Id("firstName")).Click();
+        driver.FindElement(By.Id("firstName")).SendKeys("Arvindh");
+        driver.FindElement(By.Id("lastName")).Click();
+        driver.FindElement(By.Id("lastName")).SendKeys("Sugendran");
+        driver.FindElement(By.Id("address")).Click();
+        driver.FindElement(By.Id("address")).SendKeys("211 - 288 Albert Street");
+        driver.FindElement(By.Id("city")).Click();
+        driver.FindElement(By.Id("city")).SendKeys("Waterloo");
+        driver.FindElement(By.Id("postalCode")).Click();
+        driver.FindElement(By.Id("postalCode")).SendKeys("N2L 3T8");
+        driver.FindElement(By.Id("postalCode")).SendKeys("N2L 3TT");
+        driver.FindElement(By.Id("phone")).Click();
+        driver.FindElement(By.Id("phone")).SendKeys("123-123-1234");
+        driver.FindElement(By.Id("email")).Click();
+        driver.FindElement(By.Id("email")).SendKeys("Asugendran3300@conestogac.on.ca");
+        driver.FindElement(By.Id("age")).Click();
+        driver.FindElement(By.Id("age")).SendKeys("35");
+        driver.FindElement(By.Id("experience")).Click();
+        driver.FindElement(By.Id("experience")).SendKeys("17");
+        driver.FindElement(By.Id("accidents")).SendKeys("1");
+        driver.FindElement(By.Id("btnSubmit")).Click();
+
+        //Assert
+        Assert.That(driver.FindElement(By.Id("postalCode-error")).Text, Is.EqualTo("Postal Code must follow the pattern A1A 1A1"));
+    }
 }
